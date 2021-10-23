@@ -1,0 +1,8 @@
+- hosts: QAServer
+  become: true
+  become_user: root
+  tasks:
+  - name: start docker
+    service: name=docker state=started
+  - name: Deploy Image for addressbook in QA
+    command: docker service create --name mysvc -p 8686:8080 --replicas 2 edu123/kushproject:CICD
